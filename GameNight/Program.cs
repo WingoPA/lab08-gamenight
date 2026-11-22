@@ -1,4 +1,6 @@
-﻿const string PLAYERS_FILE = "players.txt";
+﻿using System.Globalization;
+
+const string PLAYERS_FILE = "players.txt";
 const string PONITS_FILE = "points.txt";
 const string HISTORY_FILE = "history.txt";
 const int MAX_POINTS = 20;
@@ -11,17 +13,12 @@ string[] points = File.ReadAllLines(PONITS_FILE);
 string[] players = File.ReadAllLines(PLAYERS_FILE);
 string[] history = File.ReadAllLines(HISTORY_FILE);
 
-static int LeaderIndexString(string[] points);
-static int TotalPoints(string[] points);
-static string HistoryEntry(int night, string winner, int points);
-
-
 
 System.Console.WriteLine("PLAYERS POINTS");
 
 for (int i = 0; i < points.Length; i++)
 {
-    string names = Convert.ToString(players[i]);
+    string names = players[i];
     Console.Write(names);
     
     Console.Write(" ");
@@ -30,18 +27,47 @@ for (int i = 0; i < points.Length; i++)
     Console.Write(score);
 
     System.Console.WriteLine("");
-
-    
-    System.Console.WriteLine("Leader: " + );
 }
 
+//static int LeaderIndexString(string[] points);
+
+int highScore = 0;
+int bestPlayer = 0;
+int total = 0;
+
+for(int i = 0; i < points.Length; i++)
+{
+    if (Convert.ToInt32(points[i]) > highScore)
+    {
+        highScore = Convert.ToInt32(points[i]);
+        bestPlayer = i;
+        
+    }
+}
+System.Console.WriteLine("Leader: " + players[bestPlayer] + " with " + highScore);
+
+//static int TotalPoints(string[] points);
+
+for(int i = 0; i < points.Length; i++)
+{
+    total += Convert.ToInt32(points[i]);
+}
+System.Console.WriteLine("Season total: " + total);
+total = 0;
+
+//Part 2
+int point = 0;
+
+    for(int i = 0; i < points.Length; i++)
+    {
+    Console.Read();
+    Console.WriteLine("points tonight for " + players[i] + ": " + point);
+    }
 
 
 
 
-
-
-
+//static string HistoryEntry(int night, string winner, int points);
 /*
 File.WriteAllLines();
 File.AppendAllLines();
